@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html><body>
+<canvas id="c" width="300" height="300" style="border:1px solid #c3c3c3;"></canvas>
+<script type="text/javascript">
+  var c = document.getElementById('c');
+  var context = c.getContext("2d");
+  var centerx = context.canvas.width / 2;
+  var centery = context.canvas.height / 2;
+
+  a = 10;
+  b = 10;
+  rot = 1.5;
+  width = 5;
+  target_dist = 300;
+
+  context.clearRect(0, 0, 300, 300);
+
+  context.moveTo(centerx, centery);
+  context.beginPath();
+
+  var STEPS_PER_ROTATION = 120;
+  var increment = 2*Math.PI/STEPS_PER_ROTATION;
+  let theta = rot * 2 * Math.PI;
+  let dist = 0;
+
+  while( theta > 0 && dist < target_dist) {
+      r = (a + b * theta)
+      y = centery + r * Math.cos(theta);
+      x = centerx + r * Math.sin(theta);
+      context.lineTo(x, y);
+      theta -= increment
+      dist += increment * r
+  }
+  console.log('Dist', dist)
+  context.lineWidth = width;
+  context.strokeStyle = "#000";
+  context.stroke();
+
+
+  context.moveTo(centerx, centery);
+  context.beginPath();
+
+  theta = 2 * Math.PI * rot;
+  dist = 0;
+  c = width + 2
+
+  while( theta > 0 && dist < target_dist) {
+      r = (a + b * theta)
+      r0 = r + c
+      y = centery + Math.cos(theta) * r0
+      x = centerx + Math.sin(theta) * r0
+      context.lineTo(x, y);
+      theta -= increment;
+      dist += increment * r0
+  }
+  console.log('Dist', dist)
+  context.lineWidth = width;
+  context.strokeStyle = "#F00";
+  context.stroke();
+
+</script></body></html>
